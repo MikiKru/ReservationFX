@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.User;
+import service.AlertService;
 import util.InMemoryDB;
 
 import java.io.IOException;
@@ -44,11 +46,26 @@ public class RegistrationController {
                         tfLogin.getText(),
                         pfPassword.getText(),
                         tfEmail.getText()));
+                AlertService.getAlert(
+                        Alert.AlertType.INFORMATION,
+                        "Zarejestrowano", "Zarejestrowano użytkownika",
+                        "Użytkownik został zarejestorwany możesz się zalogować");
+                    // czyszczenie pól kontrolek
+                    tfLogin.setText("");
+                    pfPassword.setText("");
+                    pfPasswordConfirm.setText("");
+                    tfEmail.setText("");
             } else {
-                System.out.println("Hasła nie są takie same");
+                AlertService.getAlert(
+                        Alert.AlertType.ERROR,
+                        "Błąd rejestracji", "Błąd rejestracji użytkownika",
+                        "Podane hasła muszą być takie same");
             }
         } else {
-            System.out.println("Istnieje już taki login w bazie danych");
+            AlertService.getAlert(
+                    Alert.AlertType.ERROR,
+                    "Błąd rejestracji", "Błąd rejestracji użytkownika",
+                    "Istnije już taki login w naszej bazie danych");
         }
     }
 }

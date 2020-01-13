@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import service.AlertService;
 import util.InMemoryDB;
 
 import java.io.IOException;
@@ -34,11 +35,10 @@ public class LoginController {
     void loginAction(MouseEvent event) {
         if(isLogged(tfLogin.getText(), pfPassword.getText())){
             // okienko informacyjne
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Zalogowano");
-            alert.setHeaderText("Zalogowano poprawnie");
-            alert.setContentText("Zalogowno poprawnie, ale aplikacja jest w trakcie budowy ");
-            alert.showAndWait();
+            AlertService.getAlert(
+                    AlertType.INFORMATION,
+                    "Zalogowano", "Zalogowano poprawnie",
+                    "Zalogowno poprawnie, ale aplikacja jest w trakcie budowy ");
             lblInfo.setText("");
         } else {
             lblInfo.setText("BŁAD LOGOWANIA!");
