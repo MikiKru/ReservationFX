@@ -51,6 +51,11 @@ public class LoginController {
         primaryStage.setTitle("Panel rejestracji");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        // zakmnięcie aktualnie otwartego okna
+        Stage stage = (Stage) tfLogin.getScene()            // pobierz Scene na którj znajduje się tfLogin
+                                            .getWindow();   // pobierz Window - obiekt okna aplikacji
+        // na obiekcie stage wywołaj metodę close
+        stage.close();
     }
 
 }

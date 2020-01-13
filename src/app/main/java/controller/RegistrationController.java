@@ -27,6 +27,8 @@ public class RegistrationController {
         primaryStage.setTitle("Panel logowania");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        Stage stage = (Stage) tfLogin.getScene().getWindow();
+        stage.close();
     }
     @FXML
     void registerAction(MouseEvent event) {
