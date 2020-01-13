@@ -41,7 +41,8 @@ public class RegistrationController {
         // sprawdzenie unikatowości loginu
         if(InMemoryDB.users.stream().noneMatch(user -> user.getLogin().equals(tfLogin.getText()))) {
             // sprawdzenie tych samych wartośći w hasłach
-            if (pfPassword.getText().equals(pfPasswordConfirm.getText())) {
+            if (pfPassword.getText().equals(pfPasswordConfirm.getText()) &&
+                    (!tfLogin.getText().equals("") && !pfPassword.getText().equals("") && !tfEmail.getText().equals(""))) {
                 InMemoryDB.users.add(new User(
                         tfLogin.getText(),
                         pfPassword.getText(),
@@ -59,7 +60,7 @@ public class RegistrationController {
                 AlertService.getAlert(
                         Alert.AlertType.ERROR,
                         "Błąd rejestracji", "Błąd rejestracji użytkownika",
-                        "Podane hasła muszą być takie same");
+                        "Podane hasła muszą być takie same lub nie uzupełniłeś wszystkich pól");
             }
         } else {
             AlertService.getAlert(
