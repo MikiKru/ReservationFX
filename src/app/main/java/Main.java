@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import util.FileOperation;
 
+import java.io.IOException;
+
 public class Main extends Application {
 
     @Override
@@ -14,6 +16,10 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         FileOperation.getDataFromFile();        // pobranie zawartości z pliku do listy users
+    }
+    @Override
+    public void stop() throws IOException {
+        FileOperation.setDataToFile();
     }
 
 
