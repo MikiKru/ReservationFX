@@ -34,7 +34,7 @@ public class FileOperation {
         fileWriter.close();
     }
     public static void getEventDataFromFile() throws FileNotFoundException {
-        Scanner scanner = new Scanner(file);
+        Scanner scanner = new Scanner(fileEvent);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         while (scanner.hasNext()){
             String [] event = scanner.nextLine().split("; ");
