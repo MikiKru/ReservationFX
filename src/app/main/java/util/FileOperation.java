@@ -1,15 +1,19 @@
 package util;
 
+import model.Event;
 import model.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class FileOperation {
     private static File file = new File("C:\\Users\\PROXIMO\\Desktop\\TARR1\\Reservation\\src\\app\\main\\resources\\files\\users.csv");
+    private static File fileEvent = new File("C:\\Users\\PROXIMO\\Desktop\\TARR1\\Reservation\\src\\app\\main\\resources\\files\\events.csv");
 
     // metoda odczytująca dane z pliku i zapusjąca je do listy users
     public static void getDataFromFile() throws FileNotFoundException {
@@ -29,5 +33,14 @@ public class FileOperation {
         }
         fileWriter.close();
     }
-
+    public static void getEventDataFromFile() throws FileNotFoundException {
+        Scanner scanner = new Scanner(file);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        while (scanner.hasNext()){
+            String [] event = scanner.nextLine().split("; ");
+            InMemoryDB.events.add(new Event(event[0], event[1], LocalDateTime.parse(event[2], dtf), event[3].split(","), Integer.valueOf(event[4])));
+        }
+        scanner.close();
+        System.out.println(InMemoryDB.events);
+    }
 }

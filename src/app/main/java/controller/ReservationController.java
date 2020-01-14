@@ -40,6 +40,11 @@ public class ReservationController {
     private Button btnConfirm;
 
     @FXML
+    void selectEventAction(ActionEvent event) {
+
+    }
+
+    @FXML
     void confirmAction(ActionEvent event) {
 
     }
@@ -49,10 +54,6 @@ public class ReservationController {
 
     }
 
-    @FXML
-    void selectEventAction(ActionEvent event) {
-
-    }
     @FXML
     void submitAction(ActionEvent event) {
 
