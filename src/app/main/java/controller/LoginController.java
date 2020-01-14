@@ -33,27 +33,29 @@ public class LoginController {
                 .anyMatch(user -> user.getLogin().equals(login) && user.getPassword().equals(password));
     }
 
-    private void loginUser(){
+    private void loginUser() throws IOException {
         if(isLogged(tfLogin.getText(), pfPassword.getText())){
-            // okienko informacyjne
-            AlertService.getAlert(
-                    AlertType.INFORMATION,
-                    "Zalogowano", "Zalogowano poprawnie",
-                    "Zalogowno poprawnie, ale aplikacja jest w trakcie budowy ");
-            lblInfo.setText("");
+            Stage primaryStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/reservationPage.fxml"));
+            primaryStage.setTitle("Panel rezerwacji biletów na wydarzenie");
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+            // zakmnięcie aktualnie otwartego okna
+            Stage stage = (Stage) tfLogin.getScene().getWindow();
+            stage.close();
         } else {
             lblInfo.setText("BŁAD LOGOWANIA!");
         }
     }
 
     @FXML
-    void keyLoginAction(KeyEvent keyEvent) {
+    void keyLoginAction(KeyEvent keyEvent) throws IOException {
         if(keyEvent.getCode().equals(KeyCode.ENTER)) {      // KeyCode -> kod klawisza
             loginUser();
         }
     }
     @FXML
-    void loginAction(MouseEvent event) {
+    void loginAction(MouseEvent event) throws IOException {
         loginUser();
     }
     @FXML
