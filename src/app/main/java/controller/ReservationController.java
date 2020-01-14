@@ -20,6 +20,7 @@ import model.Event;
 import util.InMemoryDB;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class ReservationController {
     @FXML
@@ -45,7 +46,23 @@ public class ReservationController {
 
     @FXML
     void selectEventAction(ActionEvent event) {
-
+        // sprawdzam czy wybrano jakiś kurs
+        if(!cEvent.getValue().equals(null)){
+            taDescription.setDisable(false);
+            cbFv.setDisable(false);
+            btnSubmit.setDisable(false);
+            sNumber.setDisable(false);
+            cType.setDisable(false);
+            // pobierz obiekt z cEvent
+            Event selectedEvent = cEvent.getValue();
+            taDescription.setText(
+                    selectedEvent.getName() +"\n" +
+                            selectedEvent.getStartTime().format(
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n" +
+                            selectedEvent.getDescription());
+            taDescription.setEditable(false);
+            lblAviable.setText("dostępne: " + selectedEvent.getAvailablePlaces());
+        }
     }
 
     @FXML
