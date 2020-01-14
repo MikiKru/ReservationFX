@@ -1,6 +1,8 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,8 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Event;
+import util.InMemoryDB;
 
 import java.io.IOException;
 
@@ -21,7 +25,7 @@ public class ReservationController {
     @FXML
     private TextField tfSearch;
     @FXML
-    private ComboBox<?> cEvent;
+    private ComboBox<Event> cEvent;         // cEvent będzie zawierać obiekty klasy Event
     @FXML
     private Spinner<?> sNumber;
     @FXML
@@ -72,5 +76,11 @@ public class ReservationController {
     @FXML
     void exitAction(ActionEvent event) {
         Platform.exit();
+    }
+    ObservableList<Event> fxEvents = FXCollections.observableArrayList(InMemoryDB.events);
+    // metoda która się wykona jko pierwsza po odpaleniu widoku
+    public void initialize(){
+        // załadować dane z listy event do combo cEvent
+        cEvent.setItems(fxEvents);
     }
 }
