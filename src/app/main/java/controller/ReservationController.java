@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,18 +37,12 @@ public class ReservationController {
     void confirmAction(ActionEvent event) {
 
     }
-    @FXML
-    void exitAction(ActionEvent event) {
 
-    }
     @FXML
     void fvAction(ActionEvent event) {
 
     }
-    @FXML
-    void logoutAction(ActionEvent event) {
 
-    }
     @FXML
     void selectEventAction(ActionEvent event) {
 
@@ -55,5 +50,13 @@ public class ReservationController {
     @FXML
     void submitAction(ActionEvent event) {
 
+    }
+    @FXML
+    void logoutAction(ActionEvent event) {
+
+    }
+    @FXML
+    void exitAction(ActionEvent event) {
+        Platform.exit();
     }
 }
