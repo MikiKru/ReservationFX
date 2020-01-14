@@ -9,6 +9,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import service.AlertService;
@@ -31,8 +33,7 @@ public class LoginController {
                 .anyMatch(user -> user.getLogin().equals(login) && user.getPassword().equals(password));
     }
 
-    @FXML
-    void loginAction(MouseEvent event) {
+    private void loginUser(){
         if(isLogged(tfLogin.getText(), pfPassword.getText())){
             // okienko informacyjne
             AlertService.getAlert(
@@ -43,6 +44,17 @@ public class LoginController {
         } else {
             lblInfo.setText("BŁAD LOGOWANIA!");
         }
+    }
+
+    @FXML
+    void keyLoginAction(KeyEvent keyEvent) {
+        if(keyEvent.getCode().equals(KeyCode.ENTER)) {      // KeyCode -> kod klawisza
+            loginUser();
+        }
+    }
+    @FXML
+    void loginAction(MouseEvent event) {
+        loginUser();
     }
     @FXML
     void registerAction(MouseEvent event) throws IOException {
