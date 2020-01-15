@@ -47,6 +47,7 @@ public class ReservationController {
     private ObservableList<String> fxTypes = FXCollections.observableArrayList();
     // wybrany event
     private Event selectedEvent;
+    private Integer places;
 
     @FXML
     void confirmAction(ActionEvent event) throws IOException {
@@ -59,8 +60,47 @@ public class ReservationController {
         FileWriter writer = new FileWriter(selectedFile);
         writer.write("Potwierdzenie rejestracji na wydarzenie " + selectedEvent.getName() + "\n" );
         writer.write("Termin: " + selectedEvent.getStartTime() + "\n");
-        writer.write("Ilość miejsc: " + selectedEvent.getAvailablePlaces() + "\n");
+        writer.write("Ilość miejsc: " + places + "\n");
         writer.close();
+    }
+
+    @FXML
+    void submitAction(ActionEvent event) throws IOException {
+        if (cType.getValue() != null) {
+            // Alert typu Confirmation
+            boolean decision = AlertService.getConfirmationAlert(
+                    "Potwierdź rejestrację", "Potwierdź rejestrację",
+                    "Czy na pewno chcesz się zarejestrować na wydarzenie " + cEvent.getValue().getName());
+            if(decision){
+                // update w pliku events
+                Event selectedEvent = cEvent.getValue();
+                places = sNumber.getValue();
+                InMemoryDB.events.stream()
+                        .filter(e -> e.equals(selectedEvent))
+                        .findFirst().get().decrementPlaces(places);
+                FileOperation.setEventDataToFile();
+                // czyszczenie pol -> przywrócenie stany początkowego
+                cEvent.setValue(null);
+                cType.setValue(null);
+                lblAviable.setText("dostępne");
+                cbFv.setSelected(false);
+                taFV.clear();
+                taDescription.clear();
+                cType.setDisable(true);
+                cbFv.setDisable(true);
+                taFV.setDisable(true);
+                taDescription.setDisable(true);
+                sNumber.setDisable(true);
+                SpinnerValueFactory<Integer> spinerValues = new SpinnerValueFactory
+                        .IntegerSpinnerValueFactory(1, 1, 1, 1);
+                sNumber.setValueFactory(spinerValues);
+                btnSubmit.setDisable(true);
+                btnConfirm.setDisable(false);
+
+            }
+        } else {
+            AlertService.getAlert(Alert.AlertType.ERROR, "Błąd", "Błąd zapisu na event", "Musisz wybrać typ uczestnictwa");
+        }
     }
 
     @FXML
@@ -93,43 +133,7 @@ public class ReservationController {
         }
     }
 
-    @FXML
-    void submitAction(ActionEvent event) throws IOException {
-        if (cType.getValue() != null) {
-            // Alert typu Confirmation
-            boolean decision = AlertService.getConfirmationAlert(
-                    "Potwierdź rejestrację", "Potwierdź rejestrację",
-                    "Czy na pewno chcesz się zarejestrować na wydarzenie " + cEvent.getValue().getName());
-            if(decision){
-                // update w pliku events
-                Event selectedEvent = cEvent.getValue();
-                InMemoryDB.events.stream()
-                        .filter(e -> e.equals(selectedEvent))
-                        .findFirst().get().decrementPlaces(sNumber.getValue());
-                FileOperation.setEventDataToFile();
-                // czyszczenie pol -> przywrócenie stany początkowego
-                cEvent.setValue(null);
-                cType.setValue(null);
-                lblAviable.setText("dostępne");
-                cbFv.setSelected(false);
-                taFV.clear();
-                taDescription.clear();
-                cType.setDisable(true);
-                cbFv.setDisable(true);
-                taFV.setDisable(true);
-                taDescription.setDisable(true);
-                sNumber.setDisable(true);
-                SpinnerValueFactory<Integer> spinerValues = new SpinnerValueFactory
-                        .IntegerSpinnerValueFactory(1, 1, 1, 1);
-                sNumber.setValueFactory(spinerValues);
-                btnSubmit.setDisable(true);
-                btnConfirm.setDisable(false);
 
-            }
-        } else {
-            AlertService.getAlert(Alert.AlertType.ERROR, "Błąd", "Błąd zapisu na event", "Musisz wybrać typ uczestnictwa");
-        }
-    }
 
 
 
