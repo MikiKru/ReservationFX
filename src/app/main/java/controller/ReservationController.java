@@ -28,13 +28,13 @@ public class ReservationController {
     @FXML
     private ComboBox<Event> cEvent;         // cEvent będzie zawierać obiekty klasy Event
     @FXML
-    private Spinner<?> sNumber;
+    private Spinner<Integer> sNumber;
     @FXML
     private CheckBox cbFv;
     @FXML
     private TextArea taDescription;
     @FXML
-    private ComboBox<?> cType;
+    private ComboBox<String> cType;
     @FXML
     private Label lblAviable;
     @FXML
@@ -44,6 +44,10 @@ public class ReservationController {
     @FXML
     private Button btnConfirm;
 
+    // przechwuje dane o eventach
+    ObservableList<Event> fxEvents = FXCollections.observableArrayList(InMemoryDB.events);
+    // przechowyje dane o typach uczestnictwa w ramach wybranego eventu
+    ObservableList<String> fxTypes = FXCollections.observableArrayList();
     @FXML
     void selectEventAction(ActionEvent event) {
         // sprawdzam czy wybrano jakiś kurs
@@ -62,6 +66,10 @@ public class ReservationController {
                             selectedEvent.getDescription());
             taDescription.setEditable(false);
             lblAviable.setText("dostępne: " + selectedEvent.getAvailablePlaces());
+            // dodanie tablicy String [] do FXCollection
+            fxTypes = FXCollections.observableArrayList(selectedEvent.getType());
+            // dodać do cType - typy uczestnictwa
+            cType.setItems(fxTypes);
         }
     }
 
@@ -72,7 +80,12 @@ public class ReservationController {
 
     @FXML
     void fvAction(ActionEvent event) {
-
+        if(cbFv.isSelected()){          // gdy cb jest zaznaczony
+            taFV.setDisable(false);
+        } else {                        // gdy cb nie jest zaznaczony
+            taFV.setDisable(true);
+            taFV.clear();
+        }
     }
 
     @FXML
@@ -94,7 +107,8 @@ public class ReservationController {
     void exitAction(ActionEvent event) {
         Platform.exit();
     }
-    ObservableList<Event> fxEvents = FXCollections.observableArrayList(InMemoryDB.events);
+
+
     // metoda która się wykona jko pierwsza po odpaleniu widoku
     public void initialize(){
         // załadować dane z listy event do combo cEvent
