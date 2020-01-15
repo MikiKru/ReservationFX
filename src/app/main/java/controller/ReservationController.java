@@ -8,15 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Event;
+import service.AlertService;
 import util.InMemoryDB;
 
 import java.io.IOException;
@@ -48,10 +43,11 @@ public class ReservationController {
     ObservableList<Event> fxEvents = FXCollections.observableArrayList(InMemoryDB.events);
     // przechowyje dane o typach uczestnictwa w ramach wybranego eventu
     ObservableList<String> fxTypes = FXCollections.observableArrayList();
+
     @FXML
     void selectEventAction(ActionEvent event) {
         // sprawdzam czy wybrano jakiś kurs
-        if(!cEvent.getValue().equals(null)){
+        if (!cEvent.getValue().equals(null)) {
             taDescription.setDisable(false);
             cbFv.setDisable(false);
             btnSubmit.setDisable(false);
@@ -60,7 +56,7 @@ public class ReservationController {
             // pobierz obiekt z cEvent
             Event selectedEvent = cEvent.getValue();
             taDescription.setText(
-                    selectedEvent.getName() +"\n" +
+                    selectedEvent.getName() + "\n" +
                             selectedEvent.getStartTime().format(
                                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n" +
                             selectedEvent.getDescription());
@@ -70,6 +66,20 @@ public class ReservationController {
             fxTypes = FXCollections.observableArrayList(selectedEvent.getType());
             // dodać do cType - typy uczestnictwa
             cType.setItems(fxTypes);
+            // dodanie miejsc do zarezerwowania
+            SpinnerValueFactory<Integer> spinerValues = new SpinnerValueFactory
+                    .IntegerSpinnerValueFactory(1, selectedEvent.getAvailablePlaces(), 1, 1);
+            sNumber.setValueFactory(spinerValues);
+        }
+    }
+
+    @FXML
+    void submitAction(ActionEvent event) {
+        if (cType.getValue() != null) {
+            // Alert typu Confirmation
+
+        } else {
+            AlertService.getAlert(Alert.AlertType.ERROR, "Błąd", "Błąd zapisu na event", "Musisz wybrać typ uczestnictwa");
         }
     }
 
@@ -80,7 +90,7 @@ public class ReservationController {
 
     @FXML
     void fvAction(ActionEvent event) {
-        if(cbFv.isSelected()){          // gdy cb jest zaznaczony
+        if (cbFv.isSelected()) {          // gdy cb jest zaznaczony
             taFV.setDisable(false);
         } else {                        // gdy cb nie jest zaznaczony
             taFV.setDisable(true);
@@ -88,10 +98,7 @@ public class ReservationController {
         }
     }
 
-    @FXML
-    void submitAction(ActionEvent event) {
 
-    }
     @FXML
     void logoutAction(ActionEvent event) throws IOException {
         Stage primaryStage = new Stage();
@@ -103,6 +110,7 @@ public class ReservationController {
         Stage stage = (Stage) tfSearch.getScene().getWindow();
         stage.close();
     }
+
     @FXML
     void exitAction(ActionEvent event) {
         Platform.exit();
@@ -110,7 +118,7 @@ public class ReservationController {
 
 
     // metoda która się wykona jko pierwsza po odpaleniu widoku
-    public void initialize(){
+    public void initialize() {
         // załadować dane z listy event do combo cEvent
         cEvent.setItems(fxEvents);
     }
