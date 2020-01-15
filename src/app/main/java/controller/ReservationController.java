@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Event;
 import service.AlertService;
+import util.FileOperation;
 import util.InMemoryDB;
 
 import java.io.IOException;
@@ -47,7 +48,7 @@ public class ReservationController {
     @FXML
     void selectEventAction(ActionEvent event) {
         // sprawdzam czy wybrano jakiś kurs
-        if (!cEvent.getValue().equals(null)) {
+        if (cEvent.getValue() != null) {
             taDescription.setDisable(false);
             cbFv.setDisable(false);
             btnSubmit.setDisable(false);
@@ -74,7 +75,7 @@ public class ReservationController {
     }
 
     @FXML
-    void submitAction(ActionEvent event) {
+    void submitAction(ActionEvent event) throws IOException {
         if (cType.getValue() != null) {
             // Alert typu Confirmation
             boolean decision = AlertService.getConfirmationAlert(
@@ -86,6 +87,7 @@ public class ReservationController {
                 InMemoryDB.events.stream()
                         .filter(e -> e.equals(selectedEvent))
                         .findFirst().get().decrementPlaces(sNumber.getValue());
+                FileOperation.setEventDataToFile();
                 // czyszczenie pol -> przywrócenie stany początkowego
                 cEvent.setValue(null);
                 cType.setValue(null);

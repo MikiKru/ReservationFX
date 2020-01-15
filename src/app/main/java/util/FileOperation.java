@@ -9,7 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class FileOperation {
     private static File file = new File("C:\\Users\\PROXIMO\\Desktop\\TARR1\\Reservation\\src\\app\\main\\resources\\files\\users.csv");
@@ -42,5 +44,17 @@ public class FileOperation {
         }
         scanner.close();
         System.out.println(InMemoryDB.events);
+    }
+    public static void setEventDataToFile() throws IOException {
+        FileWriter fileWriter = new FileWriter(fileEvent);
+        for (Event event : InMemoryDB.events) {
+            fileWriter.write(
+                    event.getName() + "; " +
+                            event.getDescription() + "; " +
+                    event.getStartTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "; " +
+                            Arrays.stream(event.getType()).collect(Collectors.joining(",")) + "; " +
+                    event.getAvailablePlaces() + "\n");
+        }
+        fileWriter.close();
     }
 }
