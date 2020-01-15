@@ -77,7 +77,28 @@ public class ReservationController {
     void submitAction(ActionEvent event) {
         if (cType.getValue() != null) {
             // Alert typu Confirmation
+            boolean decision = AlertService.getConfirmationAlert(
+                    "Potwierdź rejestrację", "Potwierdź rejestrację",
+                    "Czy na pewno chcesz się zarejestrować na wydarzenie " + cEvent.getValue().getName());
+            if(decision){
+                // update w plik events
+                // czyszczenie pol -> przywrócenie stany początkowego
+                cEvent.setValue(null);
+                cType.setValue(null);
+                lblAviable.setText("dostępne");
+                cbFv.setSelected(false);
+                taFV.clear();
+                taDescription.clear();
+                cType.setDisable(true);
+                cbFv.setDisable(true);
+                taFV.setDisable(true);
+                taDescription.setDisable(true);
+                sNumber.setDisable(true);
+                SpinnerValueFactory<Integer> spinerValues = new SpinnerValueFactory
+                        .IntegerSpinnerValueFactory(1, 1, 1, 1);
+                sNumber.setValueFactory(spinerValues);
 
+            }
         } else {
             AlertService.getAlert(Alert.AlertType.ERROR, "Błąd", "Błąd zapisu na event", "Musisz wybrać typ uczestnictwa");
         }

@@ -4,9 +4,6 @@
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="aplikacja d3 - rezerwacja">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/main/java/controller/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/java/controller/ReservationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/java/service/AlertService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/java/service/AlertService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/resources/files/events.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/resources/files/events.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/resources/view/reservationPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/resources/view/reservationPage.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,14 +87,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/main/java/controller/ReservationController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="141">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
+              <caret line="97" column="56" selection-start-line="97" selection-start-column="56" selection-end-line="97" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3870#3871#0" expanded="true" />
+                <element signature="e#4910#4911#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -163,10 +160,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/main/java/service/AlertService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
+            <state relative-caret-position="318">
               <caret line="28" column="8" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -208,8 +205,8 @@
         <option value="$PROJECT_DIR$/src/app/main/java/util/FileOperation.java" />
         <option value="$PROJECT_DIR$/src/app/main/java/model/Event.java" />
         <option value="$PROJECT_DIR$/src/app/main/resources/files/events.csv" />
-        <option value="$PROJECT_DIR$/src/app/main/java/controller/ReservationController.java" />
         <option value="$PROJECT_DIR$/src/app/main/java/service/AlertService.java" />
+        <option value="$PROJECT_DIR$/src/app/main/java/controller/ReservationController.java" />
       </list>
     </option>
   </component>
@@ -358,7 +355,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579029870356" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579111332493" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../InnerClasses" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -477,7 +474,7 @@
       <workItem from="1578674613265" duration="9166000" />
       <workItem from="1578932941595" duration="9621000" />
       <workItem from="1579011674636" duration="10324000" />
-      <workItem from="1579106745066" duration="3732000" />
+      <workItem from="1579106745066" duration="4574000" />
     </task>
     <task id="LOCAL-00001" summary="aplikacja d2">
       <created>1578933136151</created>
@@ -633,17 +630,24 @@
       <option name="project" value="LOCAL" />
       <updated>1579107387026</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="aplikacja d3 - rezerwacja">
+      <created>1579110490326</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1579110490326</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34145000" />
+    <option name="totallyTimeSpent" value="34987000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.20402685" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" weight="0.20402685" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -652,7 +656,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.21954674" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.04107649" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -663,7 +667,7 @@
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Messages" order="13" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="15" />
       <window_info anchor="bottom" id="Terminal" order="16" />
@@ -846,23 +850,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/main/java/controller/ReservationController.java">
+    <entry file="file://$PROJECT_DIR$/src/app/main/java/service/AlertService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        <state relative-caret-position="318">
+          <caret line="28" column="8" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3870#3871#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/main/java/service/AlertService.java">
+    <entry file="file://$PROJECT_DIR$/src/app/main/java/controller/ReservationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="28" column="8" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+        <state relative-caret-position="141">
+          <caret line="97" column="56" selection-start-line="97" selection-start-column="56" selection-end-line="97" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4910#4911#0" expanded="true" />
           </folding>
         </state>
       </provider>
