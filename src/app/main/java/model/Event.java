@@ -16,6 +16,10 @@ public class Event {
     private String[] type;
     private int availablePlaces;
 
+    public void decrementPlaces(int number){
+        availablePlaces -= number;
+    }
+
     @Override
     public String toString() {
         return name + " (" + startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";

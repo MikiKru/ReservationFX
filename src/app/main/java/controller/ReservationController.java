@@ -81,7 +81,11 @@ public class ReservationController {
                     "Potwierdź rejestrację", "Potwierdź rejestrację",
                     "Czy na pewno chcesz się zarejestrować na wydarzenie " + cEvent.getValue().getName());
             if(decision){
-                // update w plik events
+                // update w pliku events
+                Event selectedEvent = cEvent.getValue();
+                InMemoryDB.events.stream()
+                        .filter(e -> e.equals(selectedEvent))
+                        .findFirst().get().decrementPlaces(sNumber.getValue());
                 // czyszczenie pol -> przywrócenie stany początkowego
                 cEvent.setValue(null);
                 cType.setValue(null);
@@ -97,6 +101,8 @@ public class ReservationController {
                 SpinnerValueFactory<Integer> spinerValues = new SpinnerValueFactory
                         .IntegerSpinnerValueFactory(1, 1, 1, 1);
                 sNumber.setValueFactory(spinerValues);
+                btnSubmit.setDisable(true);
+                btnConfirm.setDisable(false);
 
             }
         } else {
