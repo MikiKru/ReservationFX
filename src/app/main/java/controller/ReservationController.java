@@ -9,13 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Event;
 import service.AlertService;
 import util.FileOperation;
 import util.InMemoryDB;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.format.DateTimeFormatter;
 
 public class ReservationController {
@@ -41,9 +42,26 @@ public class ReservationController {
     private Button btnConfirm;
 
     // przechwuje dane o eventach
-    ObservableList<Event> fxEvents = FXCollections.observableArrayList(InMemoryDB.events);
+    private ObservableList<Event> fxEvents = FXCollections.observableArrayList(InMemoryDB.events);
     // przechowyje dane o typach uczestnictwa w ramach wybranego eventu
-    ObservableList<String> fxTypes = FXCollections.observableArrayList();
+    private ObservableList<String> fxTypes = FXCollections.observableArrayList();
+    // wybrany event
+    private Event selectedEvent;
+
+    @FXML
+    void confirmAction(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(new File("C:\\Users\\PROXIMO\\Desktop\\TARR1\\Reservation\\src\\app\\main\\resources\\files"));
+        Stage stage = new Stage();
+        File selectedFile = fileChooser.showSaveDialog(stage);
+        FileWriter writer = new FileWriter(selectedFile);
+        writer.write("Potwierdzenie rejestracji na wydarzenie " + selectedEvent.getName() + "\n" );
+        writer.write("Termin: " + selectedEvent.getStartTime() + "\n");
+        writer.write("Ilość miejsc: " + selectedEvent.getAvailablePlaces() + "\n");
+        writer.close();
+    }
 
     @FXML
     void selectEventAction(ActionEvent event) {
@@ -55,7 +73,7 @@ public class ReservationController {
             sNumber.setDisable(false);
             cType.setDisable(false);
             // pobierz obiekt z cEvent
-            Event selectedEvent = cEvent.getValue();
+            selectedEvent = cEvent.getValue();
             taDescription.setText(
                     selectedEvent.getName() + "\n" +
                             selectedEvent.getStartTime().format(
@@ -71,6 +89,7 @@ public class ReservationController {
             SpinnerValueFactory<Integer> spinerValues = new SpinnerValueFactory
                     .IntegerSpinnerValueFactory(1, selectedEvent.getAvailablePlaces(), 1, 1);
             sNumber.setValueFactory(spinerValues);
+            btnConfirm.setDisable(true);
         }
     }
 
@@ -112,10 +131,7 @@ public class ReservationController {
         }
     }
 
-    @FXML
-    void confirmAction(ActionEvent event) {
 
-    }
 
     @FXML
     void fvAction(ActionEvent event) {

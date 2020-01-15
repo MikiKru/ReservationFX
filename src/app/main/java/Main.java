@@ -16,6 +16,7 @@ public class Main extends Application {
         primaryStage.setTitle("Panel logowania");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        primaryStage.setResizable(false);       // okno nie zmienia rozmiaru
         FileOperation.getDataFromFile();        // pobranie zawartości z pliku do listy users
         FileOperation.getEventDataFromFile();
     }
